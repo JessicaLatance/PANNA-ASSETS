@@ -1,0 +1,898 @@
+/* ------------- 1. RESET GLOBAL & FONTES -------------- */
+* { /* RESET GLOBAL & CONFIGURAÇÕES BASE */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Impede que bordas e paddings quebrem os 40% e 60% de largura */
+  font-family: inherit; /* FORÇA inputs e botões a herdarem a fonte do body automaticamente! */
+}
+
+@font-face { /* IMPORTAÇÃO DA FONTE EXTERNA */
+  font-family: 'ARCHIVO';
+  src: url('assets/font/Archivo.ttf') format('truetype'); 
+}
+
+body {
+  width: 100%;
+  min-height: 100dvh;
+  background-color: #F3F3F1;
+  font-family: 'ARCHIVO', sans-serif;
+}
+
+/* ------------- 2. TIPOGRAFIA GLOBAL & TEXTOS -------------- */
+.title-h1 {
+  font-size: 1.31rem; /* Equivalente aos 21px do Figma (21÷16) */
+  font-weight: bolder;
+  color: #1A1A1A;
+  margin-bottom: 4px;
+}
+
+.title-h2 {
+  font-size: 1rem; /* Equivalente aos 16px do Figma (16÷16) */
+  font-weight: bolder;
+  color: #1A1A1A;
+  margin: 28px 0 16px 0; 
+}
+
+.title-h3 {
+  font-size: 0.75rem; /* Equivalente aos 12px do Figma (12÷16) */
+  font-weight: 400;
+  color: #77737B;
+  margin-bottom: 32px; /* Afasta o bloco de títulos do primeiro input */
+}
+
+.title-h4 {
+  font-size: 0.68rem; /* Equivalente aos 11px do Figma (11÷16) */
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  color: #5A585E;
+  margin-bottom: 6px;
+}
+
+p {
+  font-size: 0.75rem; /* Equivalente aos 12px do Figma (12÷16) */
+  color: #77737B;
+  margin: 10px 25px;
+}
+
+/* ------------- 3. TELA DE LOGIN (SPLIT SCREEN) -------------- */
+.login {
+  width: 100vw;
+  min-height: 100dvh;
+  display: flex !important; /* O !important garante que o Bootstrap não anule o Flexbox */
+  flex-direction: row !important; /* Força um do lado do outro obrigatoriamente */
+}
+
+.login__card { /* CARD DA ESQUERDA (FORMULÁRIO DE LOGIN) */
+  width: 597px; /* 477px dos inputs + 120px de padding laterais */
+  min-height: 100dvh;
+  padding: 60px;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza o formulário verticalmente */
+  flex-shrink: 0; /* Impede o navegador de achatar o formulário */
+}
+
+.logo-panna {
+  width: 180px;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+/* Campos de entrada (Inputs do Login) */
+.login__field {
+  margin-bottom: 24px; /* Espaçamento entre os blocos de input */
+  display: flex;
+  flex-direction: column;
+}
+
+.login__label {
+  font-size: 0.93rem; /* Equivalente aos 15px do Figma (15÷16) */
+  font-weight: 600;
+  color: #37333F;
+}
+
+/* Containers relativos para os ícones funcionarem por cima do input */
+.login__username,
+.login__password {
+  position: relative;
+  display: flex;
+  align-items: center; /* Centraliza o ícone e o input verticalmente */
+  width: 100%; 
+}
+
+/* Ajuste fino dos ícones (Sem margin-top que quebra o alinhamento) */
+.icon__user {
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  left: 14px; /* Afastamento da borda esquerda do input */
+  pointer-events: none; /* Permite clicar no input mesmo se clicar em cima do ícone */
+}
+
+.login__input { /* Customização dos inputs para remover o estilo padrão feio */
+  width: 477px;
+  height: 41px;
+  padding-left: 42px; /* Espaço para o texto começar após o ícone da esquerda */
+  padding-right: 16px;
+  border: 1px solid #D5D3D7;
+  border-radius: 8px;
+  font-size: 0.68rem; /* Equivalente aos 11px do Figma (11÷16) */
+  outline: none;
+}
+
+.login__input--password { /* Padding à direita para o texto não ficar sob o olho */
+  padding-right: 44px;
+}
+
+.login__toggle {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login__enter {
+  margin-top: 20px;
+}
+
+.login__enter, .login__exit { /* Botão Entrar Amarelo */
+  width: 467px;
+  height: 41px;
+  background-color: #FFBF12; /* Amarelo institucional da PANNA */
+  color: #1A1A1A;
+  border: 1px solid #E9AF00;
+  border-radius: 8px;
+  font-size: 0.93rem; /* Equivalente aos 15px do Figma (15÷16) */
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login__exit {
+  background-color: #FFFFFF;
+  border: 1px solid #AD77FF;
+}
+
+.login__divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    margin: 16px 0;
+    color: #8C8C8C;
+    font-size: 13px;
+}
+
+.login__divider::before,
+.login__divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #E5E5E3;
+}
+
+.login__submit:hover {
+  background-color: #EAB308; /* Tom mais escuro no hover */
+}
+
+/* Imagem de Arte da Direita */
+.art-login {
+  flex: 1;
+  height: 100dvh; /* Força o container a ter a altura exata da tela */
+  overflow: hidden; /* Impede que qualquer sobra da imagem crie barras de rolagem */
+}
+
+.art-login img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Substitui o background-size e elimina a borda branca */
+  display: block; /* Remove um espaço em branco fantasma que navegadores colocam sob imagens */
+}
+
+/* ------------- 4. NAVEGAÇÃO SUPERIOR (NAVBAR) -------------- */
+.navbar {
+  position: fixed !important; /* Trava a barra amarela no topo da tela */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  width: 100%;
+  height: 66px;
+  background-color: #FFD500;
+}
+
+.navbar__list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  list-style: none;
+  padding: 5px;
+}
+
+.navbar__list li {
+  padding: 0 5px;
+}
+
+.navbar__btn-menu { /* Limpa o fundo e as bordas padrão */
+  background: transparent !important; /* Força o fundo a ficar invisível */
+  border: none !important;            /* Remove qualquer borda nativa ou do Bootstrap */
+  box-shadow: none !important;        /* Remove sombras ou contornos ao clicar */
+}
+
+#navbar-manage-equipment {
+  margin-left: auto;
+  padding: 0 25px;
+}
+
+/* ------------- 5. ESTRUTURA DO PAINEL INTERNO (LAYOUT + SIDEBAR) -------------- */
+.layout-container {
+  display: block;
+  width: 100%;
+  padding-top: 66px; /* Empurra o conteúdo para baixo da navbar fixa */
+}
+
+.sidebar {
+  position: fixed !important; /* Trava o menu lateral na janela do navegador */
+  top: 66px; /* Começa logo abaixo da navbar amarela */
+  left: 0;
+  bottom: 0; /* Estica obrigatoriamente até o chão da tela */
+  width: 242px;
+  z-index: 1020;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between; /* Joga o menu para o topo e o perfil para o último pixel do fundo */
+  background-color: #FFFFFF;
+  border-right: 1px solid #E5E5E3;
+}
+
+.sidebar ul {
+  list-style: none;
+  font-size: 0.81rem;
+  padding: 6px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sidebar__buttons {
+  width: 100%;
+  padding: 0;
+}
+
+/* ESTADO NORMAL: Trava o tamanho, alinha à esquerda e separa o ícone do texto */
+.sidebar__buttons button {
+  width: 100%;
+  height: 46px;
+  padding: 0 16px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Trava o conteúdo na esquerda */
+  gap: 7px;                    /* Separa o ícone da escrita */
+  white-space: nowrap;         /* Impede o texto de quebrar linha no hover */
+  
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #343431;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* ESTADO ATIVO E HOVER: Muda apenas o fundo e o peso da fonte, sem mover nada */
+.sidebar__buttons--active button, 
+.sidebar__buttons button:hover {
+  background-color: #FFD500 !important;
+  font-weight: 700;
+}
+
+.footer_sidebar {
+  width: 100%;
+  padding: 16px;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+}
+
+/* ------------- 6. ÁREA PRINCIPAL & FORMULÁRIOS INTERNOS (MAIN) -------------- */
+.main-content {
+  margin-left: 242px; /* Abre espaço exato para a sidebar fixa não cobrir o formulário */
+  width: calc(100% - 242px); /* Garante que o conteúdo ocupe exatamente o espaço restante da tela */
+  min-height: calc(100vh - 66px);
+  background-color: #F3F3F1;
+  padding: 32px;
+}
+
+.form-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E5E3;
+  border-radius: 16px;
+  padding: 32px 40px;
+}
+
+/* Remove a margem superior apenas do primeiro título do card */
+.register-form > .title-h2:first-child {
+  margin-top: 0;
+}
+
+/* Faz cada caixinha empilhar a label em cima do input */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.register-form__input, .equipment-table__header-allsituation {
+  width: 100%; /* Garante que o campo preencha toda a largura da coluna */
+  height: 42px;
+  border-radius: 8px;
+  padding: 0 14px;
+  font-size: 0.81rem; /* Equivalente aos 13px do Figma para melhor leitura ao digitar */
+  color: #343431;
+  background-color: #FFFFFF;
+  border: 1px solid #D5D3D7;
+  outline: none;
+}
+
+/* Estilo cinza claro para selects e campos de anexo */
+.input_select {
+  background-color: #F4F4F2 !important;
+  border: 1px solid #E2E2DF !important;
+}
+
+/* Seções 1 e 2: Grade de 3 colunas */
+.register-form__section-one, 
+.register-form__section-two {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 20px;
+}
+
+/* Estilização unificada dos campos de anexo */
+.register-form__upload {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  background-color: #F4F4F2;
+  border: 1px solid #E2E2DF;
+  border-radius: 8px;
+  padding: 0 12px;
+  gap: 8px;
+}
+
+.register-form__upload-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.register-form__input-upload {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 0.81rem;
+  color: #77737B;
+  outline: none;
+}
+
+/* Seção 3: Manutenção Preventiva */
+.register-form__section-three {
+  display: flex;
+  align-items: flex-end; /* Alinha o botão "Adicionar" pela base dos inputs */
+  gap: 16px;
+}
+
+.field-large {
+  flex: 2; /* Campos maiores dividem o espaço proporcionalmente */
+}
+
+.field-small {
+  width: 110px; /* Campo Insumo menor, igual ao Figma */
+  flex-shrink: 0;
+}
+
+/* ------------- 7. BOTÕES DE AÇÃO DO FORMULÁRIO -------------- */
+.button--add {
+  height: 42px;
+  padding: 0 20px;
+  background-color: #FFFFFF;
+  border: 1.5px solid #1A1A1A;
+  border-radius: 8px;
+  font-size: 0.81rem;
+  font-weight: 700;
+  color: #1A1A1A;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.register-form__actions {
+display: flex;
+justify-content: flex-end;
+gap: 12px;
+margin-top: 36px;
+}
+.button--cancel, .button--register-equip, .button--manage-equip {
+height: 42px;
+border-radius: 8px;
+font-size: 0.81rem; /* Equivalente aos 13px do Figma */
+font-weight: bolder;
+cursor: pointer;
+}
+.button--cancel {
+padding: 0 24px;
+background-color: #FFFFFF;
+border: 1.5px solid #1A1A1A;
+color: #1A1A1A;
+}
+.button--register-equip, .button--manage-equip {
+padding: 0 24px;
+background-color: #FFD500; /* Amarelo institucional da PANNA */
+border: 1px solid #E2BC00;
+color: #1A1A1A;
+}
+
+.form-card--qrcode {
+  width: 650px;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E5E3;
+  border-radius: 16px;
+  padding: 10px 40px;
+}
+
+.buttons {
+    width: 150px;
+    padding: 5px;    
+    background-color: #FFFFFF;
+    border: 1.5px solid #1A1A1A;
+    border-radius: 8px;
+    color: #1A1A1A;
+    width: 100px;
+    height: 48px;
+    cursor: pointer;
+}
+
+.register-form__finish {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    margin: 40px 0;
+}
+
+.register-form__qr-code {
+    width: 210px;
+    height: 210px;
+}
+
+.register-form__export-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+}
+
+.export-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    height: 52px;
+    padding: 0 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #E2E2DF;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.export-item:hover {
+  background-color: #F8F8F7;
+}
+
+.action-btn { /*botoes da finalização do cadastro*/
+  font-size: 15px;
+  font-weight: 500;
+  color: #1A1A1A;
+}
+
+
+.export-item__icon--plus
+{
+  display: flex;
+  margin-left: 60px;
+}
+
+/* Garante que o ícone e o texto fiquem lado a lado e centralizados dentro do botão */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap; /* Impede o texto de quebrar em duas linhas */
+}
+
+.button__icon {
+  width: 18px;
+  height: 18px;
+}
+
+
+.register-form__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+
+.title-inform{
+  width: fit-content;
+  margin: 20px 0;
+  color: #226C3E;
+  font-weight: bolder;
+  background-color: #DCEFDC;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.button--manage-equip{
+  display: flex;
+  gap: 12px;
+  
+}
+
+.manage-header{
+  display: flex;
+  justify-content: space-between; /*empurra os textos para a esquerda e o botão totalmente para a direita*/
+  align-items:center; /*alinha o botão verticalmente no meio da altura dos textos*/
+}
+
+.title-h3--ge {
+  font-size: 0.75rem; /* Equivalente aos 12px do Figma (12÷16) */
+  font-weight: 400;
+  color: #77737B;
+  padding: 10px 0 0;
+  text-decoration: none;
+}
+
+.equipment-summary{
+  display: grid;
+  grid-template-columns: repeat(4,1fr); /*colocando os cards em 4 colunas*/
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.equipment-summary__card{
+  padding: 20px 24px;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E5E3 ;
+  border-radius: 14px;
+}
+
+.equipment-summary__card--active{
+ border: 1.5px solid #F5C400;
+}
+
+.title-h1--ge {
+  font-size: 1.31rem; /* Equivalente aos 21px do Figma (21÷16) */
+  font-weight: bolder;
+  color: #1A1A1A;
+  padding: 0x;
+  margin: 7px 0;
+ 
+}
+
+.equipment-table{
+  background-color: #FFFFFF;
+  border: 1px solid #E5E5E3;
+  border-radius: 16px;
+  padding: 24px 32px;
+  margin-top: 24px;
+}
+
+.equipment-table__header--filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+.equipment-table__header--search {
+  width: 260px;
+  display: flex;
+  align-items: center;
+  height: 42px;
+  background-color: #F4F4F2;
+  border: 1px solid #E2E2DF;
+  border-radius: 8px;
+  padding: 0 12px;
+  gap: 12px;
+}
+
+.equipment-table__header{
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 24px;
+}
+
+
+.equipment-table__search-btn{
+  background-color: transparent;
+  border: none;
+}
+
+.equipment-table__search-input{
+  border: none;
+  background-color: transparent;
+  outline: none;
+  width: 100%;
+}
+
+.equipment-table__header-allsituation {
+  width: 190px;
+}
+
+.equipament-table__buttons{
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+  background-color: transparent;
+  border: none;
+}
+
+.equipment-table__grid{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 16px 0; /* border-spacing: define o espaçamento entre as colunas e linhas da tabela (só funciona com border-collapse: separate) */
+
+}
+
+th{
+  font-size: 1rem; /* Equivalente aos 16px do Figma (16÷16) */
+  text-align: left;
+  color: #8C8C8C ;
+  padding: 18px 16x;
+  border-bottom: 1px solid #E5E5E3;
+}
+
+td{
+  padding: 18px 16px;
+  vertical-align: middle; /* vertical-align: middle; centraliza o conteúdo verticalmente no meio da altura da célula */
+  border-bottom: 1px solid #F0F0EE;
+
+}
+
+.status-badge{
+display: inline-flex;
+align-items: center;
+gap: 6px;
+padding: 4px 12px;
+border-radius: 20px;
+font-size: 0.75rem; /* Equivalente aos 12px do Figma (12÷16) */
+font-weight: bolder;
+}
+
+.functioning{
+  background-color:#DCEFDC;
+  color:#226C3E ;
+}
+
+.maintenance{
+  background-color: #FEF3C7;
+  color: #B45309;
+}
+.stopped{
+  background-color: #FEE2E2;
+  color: #B91C1C;
+}
+
+.inactive{
+  background-color: #F3F4F6;
+  color: #4B5563;
+}
+
+.equipament-table__edit, .equipament-table__enable-disable,
+ .equipament-table__delete{
+  background-color: transparent;
+  border: none;  
+}
+
+ .equipment-table__several{
+  color: #77737B;
+ }
+
+  .equipment-table__date{
+    margin: 0;
+  }
+
+  .equipment-table__name, .equipment-table__date{
+    font-weight: bolder;
+
+  }
+
+   .equipment-table__status-color-maroon{
+    color: #B45309;
+    margin: 0;
+  }
+   
+
+   .equipment-table__status-color-red{
+    color: #B91C1C;
+    margin: 0;
+  }
+   
+
+   .equipment-table__status-color-green{
+    color: #226C3E;
+    margin: 0;
+   }
+
+   .equipment-table__status-color-gray{
+    color: #4B5563;
+    margin: 0;
+   }
+
+   
+/* PANNA: menu lateral recolhível. Mantém as medidas originais quando aberto. */
+body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+body.sidebar-collapsed .main-content { margin-left: 0; width: 100%; }
+.sidebar, .main-content { transition: transform .2s ease, margin-left .2s ease, width .2s ease; }
+@media (max-width: 650px) {
+  .main-content { padding: 16px; }
+  body.sidebar-collapsed .sidebar { pointer-events: none; }
+}
+
+/* PANNA ETAPA 2 — estilos exclusivos da tela GE2; estilos existentes preservados. */
+.panna-detail-top {display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.panna-detail-actions {display:flex;gap:10px;flex-wrap:wrap}
+.panna-outline-btn,.panna-yellow-btn {display:inline-block;padding:12px 17px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;color:#242424}
+.panna-outline-btn {border:1px solid #777;background:#fff}
+.panna-yellow-btn {background:#ffd600;border:1px solid #ffd600}
+.panna-detail-tabs {display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.panna-detail-tabs a {padding:10px 16px;border:1px solid #ddd;border-radius:7px;text-decoration:none;color:#333;background:#fff}
+.panna-detail-tabs .panna-tab-active {background:#ffd600;border-color:#ffd600}
+.panna-detail-status {margin:12px 0 18px;color:#555}
+.panna-detail-card {background:#fff;border:1px solid #e1e1e1;border-radius:12px;padding:22px;margin:0 0 16px;max-width:1100px}
+.panna-detail-card h2 {font-size:19px;margin:0 0 20px}
+.panna-detail-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 18px}
+.panna-detail-field {min-width:0;overflow-wrap:anywhere}
+.panna-detail-field span {display:block;color:#777;font-size:11px;text-transform:uppercase;margin-bottom:6px}
+.panna-detail-field strong {font-size:14px;color:#222}
+.panna-clickable-row {cursor:pointer}
+.panna-clickable-row:hover {background:#fffbea}
+.panna-clickable-row:focus-visible {outline:2px solid #c9a600}
+@media(max-width:800px){.panna-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.panna-detail-grid{grid-template-columns:1fr}.panna-detail-card{padding:16px}}
+
+/* ETAPA 3 — Detalhes: regras isoladas para não alterar as demais telas. */
+.panna-detail-top--new{align-items:flex-end;margin-bottom:22px}
+.panna-detail-eyebrow{font-size:11px;font-weight:800;letter-spacing:1.2px;color:#777;margin:0 0 7px}
+.panna-detail-subtitle{color:#777;font-size:14px;margin:5px 0 0}
+.panna-detail-layout{display:grid;grid-template-columns:minmax(0,2.25fr) minmax(260px,1fr);gap:20px;align-items:start;max-width:1440px}
+.panna-detail-main,.panna-detail-aside{min-width:0}
+.panna-detail-layout .panna-detail-card{max-width:none;margin-bottom:20px;border-radius:16px;padding:24px}
+.panna-card-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
+.panna-card-heading h2{margin:0}
+.panna-detail-layout .panna-detail-grid{gap:24px 18px}
+.panna-detail-layout .panna-detail-field span{font-size:11px;font-weight:700;letter-spacing:.35px;color:#8a8a86}
+.panna-detail-layout .panna-detail-field strong{font-size:14px;line-height:1.45}
+.panna-detail-status{display:inline-flex;align-items:center;margin:0;border-radius:99px;padding:8px 14px;font-size:12px;font-weight:700;white-space:nowrap}
+.panna-status-ok,.panna-alerta-ok{background:#e6f4eb;color:#247044}
+.panna-status-warning,.panna-alerta-warning{background:#fff3de;color:#98600f}
+.panna-status-danger,.panna-alerta-danger{background:#fde9e7;color:#a72f28}
+.panna-status-muted,.panna-alerta-neutral{background:#f0f0f0;color:#666}
+.panna-detail-tabs{margin:0 0 20px}
+.panna-detail-tabs a{border-radius:10px;padding:11px 18px;font-weight:650}
+.panna-detail-layout .panna-detail-card h2{font-size:18px}
+.panna-preventiva-count{display:flex;align-items:baseline;gap:9px;margin:12px 0 3px}
+.panna-preventiva-count strong{font-size:42px;line-height:1.1;color:#1d1d1d}
+.panna-preventiva-count span{font-size:14px;color:#555}
+#panna-data-preventiva{font-size:13px;color:#666;margin:6px 0 15px}
+.panna-progress{height:9px;border-radius:30px;background:#e6e6e4;overflow:hidden}
+.panna-progress>div{height:100%;width:0;background:#27834c;border-radius:30px;transition:width .2s}
+.panna-preventiva-rule{font-size:12px;color:#666;line-height:1.6;margin:14px 0}
+.panna-preventiva-alerta{display:inline-block;font-size:12px;font-weight:700;padding:7px 12px;border-radius:99px;margin:0 0 16px}
+.panna-full-btn{display:block;text-align:center;width:100%;box-sizing:border-box}
+.panna-qr-content{display:flex;align-items:center;gap:16px}
+.panna-qr-image{width:128px;height:128px;object-fit:contain;flex-shrink:0}
+.panna-qr-info{min-width:0;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:7px;font-size:13px}
+.panna-qr-info small{font-size:12px;color:#666}
+.panna-qr-note{font-size:11px;color:#999}
+.panna-eventos{border-left:2px solid #e7e7e7;padding:12px 0 12px 16px;color:#777;font-size:14px}
+@media(max-width:1000px){.panna-detail-layout{grid-template-columns:1fr}.panna-detail-aside{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.panna-detail-aside .panna-detail-card{margin:0}}
+@media(max-width:680px){.panna-detail-aside{grid-template-columns:1fr}.panna-detail-layout .panna-detail-card{padding:18px}.panna-qr-image{width:110px;height:110px}}
+
+/* ETAPA 4 — Botões e confirmação da tela de detalhes (escopo restrito). */
+.panna-detail-actions button{font-family:inherit;cursor:pointer}
+.panna-detail-actions .panna-danger-btn{border-color:#bd3730;color:#bd3730;background:#fff}
+.panna-detail-actions .panna-danger-btn:hover{background:#fff1f0}
+.panna-detail-actions .panna-yellow-btn{background:#ffd600;border-color:#ffd600}
+.panna-confirm-dialog{border:1px solid #dedede;border-radius:15px;padding:26px;width:min(420px,calc(100% - 32px));box-sizing:border-box;box-shadow:0 18px 65px #0003;color:#242424}
+.panna-confirm-dialog::backdrop{background:#0008}
+.panna-confirm-dialog h2{font-size:21px;margin:0 0 12px}
+.panna-confirm-dialog p{font-size:14px;line-height:1.6;color:#555;margin:0 0 24px;overflow-wrap:anywhere}
+.panna-confirm-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.panna-confirm-actions button{cursor:pointer;font-family:inherit}
+.panna-danger-solid{background:#ba302a;border:1px solid #ba302a;color:#fff;border-radius:8px;padding:12px 17px;font-size:14px;font-weight:700}
+.panna-danger-solid:hover{background:#92231f}
+.panna-confirm-dialog button:focus-visible,.panna-detail-actions button:focus-visible{outline:3px solid #856b00;outline-offset:2px}
+
+/* ETAPA 5 — Estilos isolados do editor de preventivas; sem alterar os formulários existentes. */
+.panna-planos-section{margin-top:24px}.panna-planos-heading,.panna-plano-topo{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}.panna-planos-heading p,.panna-planos-ajuda{color:#777;font-size:13px;margin:5px 0}.panna-planos-lista{display:grid;gap:16px}.panna-plano-card,.panna-plano-resumo{background:#fff;border:1px solid #ddd;border-radius:12px;padding:18px}.panna-plano-card h3,.panna-plano-resumo h3{font-size:17px;margin:0}.panna-plano-card h4{font-size:14px;margin:0}.panna-plano-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}.panna-plano-campo{display:grid;gap:6px;font-size:12px;font-weight:600;color:#555}.panna-insumo-linha{display:grid;grid-template-columns:minmax(0,2fr) minmax(90px,1fr) minmax(110px,1fr) auto;gap:8px;margin:10px 0}.panna-planos-vazio{padding:18px;border:1px dashed #ccc;border-radius:10px;color:#666}.panna-planos-detalhe{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.panna-plano-resumo{background:#fafafa}.panna-plano-resumo ul{padding-left:20px}.panna-plano-resumo li{margin:5px 0}.panna-planos-link{align-self:start;text-decoration:none;text-align:center}@media(max-width:650px){.panna-plano-grid{grid-template-columns:1fr}.panna-insumo-linha{grid-template-columns:1fr 1fr}.panna-insumo-linha input:first-child{grid-column:1/-1}}
+
+/* ETAPA 6 — edição compacta de preventivas; estilos isolados das demais telas. */
+.panna-planos-section{margin-top:16px}.panna-planos-heading{margin-bottom:10px}.panna-planos-lista{gap:8px}.panna-plano-card{padding:11px 14px;border-radius:10px}.panna-plano-cabecalho{margin:0}.panna-plano-toggle{background:transparent;border:0;text-align:left;cursor:pointer;font:600 14px inherit;color:#242424;flex:1;min-width:160px;padding:7px 0}.panna-plano-acoes{display:flex;gap:6px}.panna-plano-aberto{border-color:#e7bf00;background:#fffef8}.panna-plano-grid{gap:9px;margin:10px 0}.panna-plano-campo{gap:4px}.panna-insumo-linha{margin:6px 0}.panna-salvar-plano{display:block;margin:12px 0 0 auto}.panna-plano-resumo{position:relative;border:1px solid #e7e7e7;border-left:3px solid #ffcc00;background:#fff;box-shadow:0 2px 8px #00000008;padding:17px}.panna-plano-resumo h3{padding-right:12px;margin-bottom:8px}.panna-plano-etiqueta{display:inline-block;font-size:11px;background:#fff5ce;color:#765900;padding:4px 9px;border-radius:20px;margin-bottom:12px}.panna-plano-resumo ul{margin:7px 0 0}.panna-link-discreto{display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#555;text-decoration:none;border:1px solid #ddd;background:#fff;border-radius:8px;padding:9px 12px;align-self:start}.panna-link-discreto:hover{border-color:#e1b900;color:#222}.panna-planos-detalhe .panna-link-discreto{grid-column:1/-1;justify-self:end}@media(max-width:650px){.panna-plano-cabecalho{align-items:flex-start}.panna-plano-acoes{margin-left:auto}}
+
+/* ETAPA 7 — Ações compactas nas preventivas: somente ícones de editar/excluir. */
+.panna-icone-acao{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;padding:0;border:1px solid transparent;border-radius:8px;background:transparent;color:#555;cursor:pointer;flex-shrink:0;transition:background .15s,border-color .15s,color .15s}
+.panna-icone-acao:hover{background:#f4f4f4;border-color:#ddd;color:#222}
+.panna-icone-excluir:hover{background:#fff0f0;border-color:#f1baba;color:#b42318}
+.panna-icone-acao:focus-visible{outline:2px solid #b18c00;outline-offset:2px}
+.panna-plano-acoes{gap:2px}
+
+/* ETAPA 8 — gestão de preventivas na aba Manutenção de GE2. */
+.panna-detail-card[hidden],.panna-editor-manutencao[hidden]{display:none!important}
+.panna-manutencao-heading{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.panna-manutencao-heading h2,.panna-manutencao-heading h3,.panna-manutencao-heading h4{margin:0}
+.panna-manutencao-heading p,.panna-manutencao-meta{color:#666;font-size:13px;margin:5px 0 0}
+.panna-editor-manutencao{background:#fffdf3;border:1px solid #e9d68c;border-radius:12px;padding:18px;margin:18px 0}
+.panna-manutencao-acoes{display:flex;gap:8px;align-items:center}
+.panna-plano-gerenciavel{min-width:0}
+.panna-plano-gerenciavel details{border-top:1px solid #eee;padding-top:12px;margin-top:12px}
+.panna-plano-gerenciavel summary{cursor:pointer;font-size:13px;font-weight:600;color:#6a5700}
+.panna-manutencao-conteudo{padding:12px 0 0;display:grid;gap:8px}
+.panna-manutencao-conteudo ul{margin:0 0 0 16px;padding:0}
+@media(max-width:650px){.panna-manutencao-heading{align-items:flex-start}.panna-manutencao-heading>.panna-yellow-btn{width:100%}}
+
+/* ETAPA 9 — Histórico de execuções e ação de registrar realização. */
+.panna-historico-intro{color:#64748b;font-size:.9rem;margin:.5rem 0 1.2rem}
+.panna-historico-registro{border:1px solid #e5e7eb;border-left:3px solid #eab308;border-radius:10px;padding:16px;margin:12px 0;background:#fff}
+.panna-historico-registro p{margin:8px 0;color:#475569;font-size:.9rem}
+.panna-historico-registro ul{margin:10px 0;padding-left:22px}
+.panna-historico-topo{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.panna-historico-topo time{font-size:.85rem;color:#64748b}
+.panna-registrar-realizacao{font-size:.82rem;padding:7px 10px;white-space:nowrap}
+.panna-manutencao-acoes{flex-wrap:wrap;justify-content:flex-end}
+
+/* ETAPA 10 — Lista de preventivas expansível, inspirada no layout de referência.
+   Escopo restrito à aba Manutenção de GE2 para não afetar o cadastro CE1. */
+#panna-manutencao .panna-manutencao-tabela{border:1px solid #e6e6e4;border-radius:10px;overflow:hidden;background:white}
+#panna-manutencao .panna-manutencao-tabela-cabecalho,#panna-manutencao .panna-manutencao-linha-resumo{display:grid;grid-template-columns:minmax(125px,1.25fr) minmax(120px,1.25fr) minmax(105px,1fr) minmax(105px,1fr) 24px;gap:12px;align-items:center}
+#panna-manutencao .panna-manutencao-tabela-cabecalho{background:#f7f7f5;color:#777;font-size:11px;font-weight:700;padding:13px 16px}
+#panna-manutencao .panna-manutencao-linha{border-top:1px solid #ededeb;background:#fff}
+#panna-manutencao .panna-manutencao-linha-resumo{padding:16px;cursor:pointer;font-size:13px;list-style:none;min-height:56px}
+#panna-manutencao .panna-manutencao-linha-resumo::-webkit-details-marker{display:none}
+#panna-manutencao .panna-manutencao-linha-resumo:hover{background:#fffdf3}
+#panna-manutencao .panna-manutencao-linha-resumo:focus-visible{outline:2px solid #d9ac00;outline-offset:-3px}
+#panna-manutencao .panna-col-tipo{font-weight:700;color:#252525}
+#panna-manutencao .panna-col-insumos{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#555}
+#panna-manutencao .panna-col-data{font-weight:600}
+#panna-manutencao .panna-linha-seta{font-size:20px;color:#777;text-align:center;transition:transform .15s}
+#panna-manutencao details[open]>.panna-manutencao-linha-resumo .panna-linha-seta{transform:rotate(180deg)}
+#panna-manutencao .panna-manutencao-linha-detalhes{background:#fffef9;border-top:1px solid #eee8d6;padding:14px 18px 18px;font-size:13px}
+#panna-manutencao .panna-manutencao-linha-detalhes ul{margin:8px 0 12px;padding-left:20px}
+#panna-manutencao .panna-acoes-linha{justify-content:flex-end;margin-top:12px}
+#panna-manutencao .panna-editor-acoes{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:18px}
+#panna-manutencao .panna-editor-acoes button{margin:0}
+@media(max-width:760px){#panna-manutencao .panna-manutencao-tabela-cabecalho{display:none}#panna-manutencao .panna-manutencao-linha-resumo{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 20px;gap:8px}#panna-manutencao .panna-col-insumos,#panna-manutencao .panna-col-periodo{display:none}#panna-manutencao .panna-editor-acoes{justify-content:stretch}#panna-manutencao .panna-editor-acoes button{flex:1}}
+
+/* ETAPA 11 — Linha do tempo de eventos do equipamento (GE2).
+   Estilos isolados para não afetar as outras páginas do grupo. */
+#panna-historico.panna-eventos{position:relative;margin-top:20px;padding-left:5px}
+.panna-evento-linha{display:grid;grid-template-columns:20px minmax(0,1fr);gap:12px;position:relative;min-height:72px}
+.panna-evento-linha:not(:last-child)::before{content:"";position:absolute;left:7px;top:19px;bottom:0;width:2px;background:#e5e7eb}
+.panna-evento-ponto{width:10px;height:10px;border-radius:50%;background:#64748b;margin-top:5px;z-index:1}
+.panna-evento-cadastro{background:#218553}.panna-evento-status{background:#b45309}.panna-evento-manutencao{background:#15803d}.panna-evento-preventiva{background:#2563a0}.panna-evento-edicao{background:#64748b}
+.panna-evento-corpo{padding-bottom:22px;min-width:0}.panna-evento-corpo strong{display:block;font-size:.92rem;color:#202020}.panna-evento-corpo p{font-size:.85rem;color:#59616b;margin:5px 0}.panna-evento-corpo time{display:block;font-size:.78rem;color:#77808a;margin-top:5px}.panna-evento-corpo details{font-size:.83rem;margin-top:8px}.panna-evento-corpo summary{cursor:pointer}.panna-evento-corpo ul{padding-left:20px;margin:6px 0}
