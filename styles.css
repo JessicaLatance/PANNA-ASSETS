@@ -195,6 +195,18 @@ p {
   display: block; /* Remove um espaço em branco fantasma que navegadores colocam sob imagens */
 }
 
+/*-----DEIXAR LOGIN RESPONSIVO-----*/
+@media (max-width: 768px) { /* só vale em telas com até 768px de largura (tablet e celular) */
+  .login {width: 100%;} /* troca o 100vw por 100% para evitar rolagem horizontal */
+  .art-login {display: none;} /* esconde a imagem lateral no celular */
+  .login__card {width: 100%; padding: 24px;} /* cartão ocupa a largura toda (era 597px) e margem interna menor (era 60px) */
+  .logo-panna {margin-bottom: 32px;} /* espaço menor abaixo da logo (era 60px) */
+  .login__input {width: 100%} /* campos acompanham a largura do cartão (era 477px fixo) */
+  .login__enter, .login__exit {width: 100%;} /* botões acompanham a largura do cartão (era 467px fixo) */
+}
+
+
+
 /* ------------- 4. NAVEGAÇÃO SUPERIOR (NAVBAR) -------------- */
 .navbar {
   position: fixed !important; /* Trava a barra amarela no topo da tela */
@@ -209,6 +221,7 @@ p {
 
 .navbar__list {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -331,7 +344,7 @@ p {
   width: 100%;
 }
 
-.register-form__input, .equipment-table__header-allsituation {
+.register-form__input, .equipment-table__header-allsituation, textarea {
   width: 100%; /* Garante que o campo preencha toda a largura da coluna */
   height: 42px;
   border-radius: 8px;
@@ -709,6 +722,11 @@ font-weight: bolder;
   border: none;  
 }
 
+.equipament-table__enable-disable img {
+  width: 16px;
+  height: 16px;
+}
+
  .equipment-table__several{
   color: #77737B;
  }
@@ -896,3 +914,89 @@ body.sidebar-collapsed .main-content { margin-left: 0; width: 100%; }
 .panna-evento-ponto{width:10px;height:10px;border-radius:50%;background:#64748b;margin-top:5px;z-index:1}
 .panna-evento-cadastro{background:#218553}.panna-evento-status{background:#b45309}.panna-evento-manutencao{background:#15803d}.panna-evento-preventiva{background:#2563a0}.panna-evento-edicao{background:#64748b}
 .panna-evento-corpo{padding-bottom:22px;min-width:0}.panna-evento-corpo strong{display:block;font-size:.92rem;color:#202020}.panna-evento-corpo p{font-size:.85rem;color:#59616b;margin:5px 0}.panna-evento-corpo time{display:block;font-size:.78rem;color:#77808a;margin-top:5px}.panna-evento-corpo details{font-size:.83rem;margin-top:8px}.panna-evento-corpo summary{cursor:pointer}.panna-evento-corpo ul{padding-left:20px;margin:6px 0}
+
+/* ------------- TELA OPERAÇÃO EM CAMPO (MOBILE) -------------- */
+.main-content--field{
+  margin: 0 auto; /*tira o tira os 242px da sidebar e centraliza*/
+  width: 100%; /*ocupa a largura toda*/
+  padding-top: 82px; /*66px da navbar + 16px de respiro*/
+  max-width: 480px; /*evita esticar a tela grande*/
+ }
+
+.export-item--field{
+  height: 64px;
+ 
+}
+
+.field-actions{
+  display: flex;
+  flex-direction: column;
+  gap:12px;
+}
+
+.export-item--field:hover, .export-item--field:active{
+  background-color: #FFD500;
+  border-color: #E2BC00;
+ }
+
+.export-item--field:hover .action-btn, .export-item--field:active .action-btn {
+  font-weight: 700;
+}
+
+.field-qr__label{
+  color: #5A585E;
+  font-size: 0.68rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+  
+}
+
+.form-card--field{
+  width: 100%;
+  padding: 16px;
+}
+  
+.field-qr__or{
+  text-align: center;
+  margin-bottom: 16px;  
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.register-form__finish--centered{
+  justify-content: center;
+  margin: 24px 0 8px;
+}
+
+
+
+.field-form__textarea {
+  height: 100px;
+  padding: 12px 14px;
+  resize: none; /*;o usuário não consegue arrastar o cantinho e bagunçar o layout*/
+  display:block;
+}
+
+.field-form__group{
+  margin-top: 20px;
+}
+
+.field-form__btn{
+  flex: 1;
+}
+
+.field-form__code{
+  margin: 0 0 8px;
+}
+
+.field-form__options{
+  display: flex;
+  gap: 20px;
+  accent-color: #1A1A1A;
+  
+}
+
+.field-form__name{
+  margin: 10px 0 4px;
+}
