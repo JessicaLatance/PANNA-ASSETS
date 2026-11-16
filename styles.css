@@ -695,9 +695,10 @@ padding: 4px 12px;
 border-radius: 20px;
 font-size: 0.75rem; /* Equivalente aos 12px do Figma (12÷16) */
 font-weight: bolder;
+white-space: nowrap; /*o texto nunca quebra, e a bolinha do status e a palavra ficam sempre na mesma linha*/
 }
 
-.functioning{
+.functioning, .completed{
   background-color:#DCEFDC;
   color:#226C3E ;
 }
@@ -742,6 +743,12 @@ font-weight: bolder;
 
    .equipment-table__status-color-maroon{
     color: #B45309;
+    margin: 0;
+  }
+
+  
+   .equipment-table__status-color-blue{
+    color: #4A86C0;
     margin: 0;
   }
    
@@ -999,4 +1006,31 @@ body.sidebar-collapsed .main-content { margin-left: 0; width: 100%; }
 
 .field-form__name{
   margin: 10px 0 4px;
+}
+
+/* ------------- TELA TRANSFERENCIA TE1-------------- */
+.urgent{
+  background-color:#FAEAE8;
+  color:#A83C32 ;
+}
+
+.normal, .cancelled{
+  background-color:#EEEEEB;
+  color:#65655F;
+}
+
+.in-motion{
+  background-color:#E9F2FA;
+  color:#2B608E;
+}
+
+.pending{
+  background-color:#FBF2E2;
+  color:#986119 ;
+
+}
+
+.transfer-table__code{
+    color: #77737B;
+    white-space: nowrap;
 }
